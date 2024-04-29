@@ -1,0 +1,35 @@
+.sign-up {
+    &__background {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #eee;
+        padding: 4rem;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+
+}
+
+.button {
+        font-size: 1.6rem;
+        padding: 1rem;
+        background-color: #f4f4f4;
+        border: none;
+        color: #333;
+        cursor: pointer;
+        text-align: left;
+        transition: background-color 0.3s;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #e9e9e9;
+        }
+    }

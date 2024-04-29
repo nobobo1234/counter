@@ -1,23 +1,18 @@
-import signUp from "@/auth/actions/sign-up";
-import styles from "./page.module.scss";
-import { H1 } from "@/components/Typography";
 import Input from "@/components/Input";
+import styles from "./page.module.scss";
+import signIn from "@/auth/actions/sign-in";
+import { H1 } from "@/components/Typography";
 
-export default function Page() {
+export default function SignIn() {
   return (
     <div className={styles["sign-up__background"]}>
       <div className={styles["sign-up__container"]}>
-        <H1>Sign up</H1>
-        <form action={signUp}>
+        <H1>Sign in</H1>
+        <form action={signIn}>
           <Input name="email" placeholder="Email" />
           <Input type="password" name="password" placeholder="Password" />
-          <Input
-            type="password"
-            name="passwordConfirmation"
-            placeholder="Confirm Password"
-          />
           <button className={styles["button"]} type="submit">
-            Sign Up
+            Sign In
           </button>
         </form>
       </div>

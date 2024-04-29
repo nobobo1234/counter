@@ -17,15 +17,16 @@ model Group {
 }
 
 model User {
-    id        String   @id @default(uuid())
-    name      String   @unique
+    id        String    @id @default(uuid())
+    email     String    @unique
     password  String
-    user_type String   @default("user")
-    group     Group    @relation(fields: [groupId], references: [id])
-    groupId   String
+    user_type String    @default("user")
+    group     Group?    @relation(fields: [groupId], references: [id])
+    groupId   String?
     Count     Count[]
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    sessions  Session[]
 }
 
 model Count {
@@ -34,4 +35,11 @@ model Count {
     personId  String
     count     Int
     countDate DateTime
+}
+
+model Session {
+    id        String   @id
+    userId    String
+    expiresAt DateTime
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

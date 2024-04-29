@@ -4,10 +4,17 @@ import { H1, H3 } from "@/components/Typography";
 import LineChart from "./chart";
 import Top3 from "@/components/Leaderboard/Top3";
 import Leaderboard from "@/components/Leaderboard/Leaderboard";
+import validateRequest from "@/auth/actions/validate";
+import { redirect } from "next/navigation";
 
 import numbers from "@/numbers";
 
 export default async function Page({ params }: { params: { id: string } }) {
+  const { user } = await validateRequest();
+  if (!user) {
+    return redirect("/auth/sign-in");
+  }
+
   const group = await prisma.group.findUnique({
     where: {
       id: params.id,

@@ -1,0 +1,12 @@
+.input {
+    &__container {
+        display: flex;
+        padding: .5rem 0rem;
+        flex-direction: column;
+        font-size: 1.6rem;
+
+        input {
+            font-size: 1.6rem;
+        }
+    }
+}
