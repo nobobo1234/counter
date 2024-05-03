@@ -1,28 +1,61 @@
+@keyframes growFromBottom {
+    0% {
+        transform: scaleY(0);
+    }
+    80% {
+        transform: scaleY(1.2);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
 .top3 {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     margin-bottom: 2rem;
+    border-bottom: 3px solid black;
+    font-family: "Roboto", sans-serif;
 
     &__item {
         display: flex;
         flex-direction: column;
         text-align: center;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        animation: growFromBottom .5s ease-out forwards;
 
         & > p {
             font-size: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: .5rem;
+            font-weight: bold;
         }
     }
 
     &__podium {
         display: flex;
-        justify-content: center;
         align-items: center;
+        flex-direction: column;
+        padding-top: 2rem;
         width: 100%;
-        width: 10rem;
-        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+        width: 14rem;
+        box-shadow: .3rem 0rem 0.4rem rgba(0, 0, 0, 0.1);
         font-size: 1.6rem;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        margin: 0 3rem;
+
+        &-text {
+            font-weight: bold;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+
+            sup {
+                font-weight: 400;
+                font-size: 1.6rem;
+            }
+        }
 
         &--1 {
             background-color: gold;
@@ -31,12 +64,12 @@
 
         &--2 {
             background-color: silver;
-            height: 17rem;
+            height: 15rem;
         }
 
         &--3 {
             background-color: #cd7f32;
-            height: 15rem;
+            height: 10rem;
         }
     }
 }
@@ -45,9 +78,10 @@
     // style the ul like a table list
     display: flex;
     flex-direction: column;
+    grid-row: 3 / 4;
     font-size: 2rem;
     list-style: none;
-    border: 1px solid #eee;
+    font-family: Roboto, sans-serif;
 
     &__header, &__item {
         display: grid;
@@ -57,6 +91,7 @@
 
     &__header {
         font-weight: 700;
-        background-color: #f4f4f4;
+        border-bottom: 3px solid #ddd;
+        font-size: 1.4rem;
     }
 }

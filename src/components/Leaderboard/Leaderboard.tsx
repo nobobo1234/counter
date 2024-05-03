@@ -6,7 +6,7 @@ const Leaderboard = () => {
   return (
     <ul className={styles["list-from-4"]}>
       <li className={styles["list-from-4__header"]}>
-        <p>Plaats</p>
+        <p>#</p>
         <p>Naam</p>
         <p>Punten</p>
       </li>

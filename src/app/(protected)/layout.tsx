@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import validateRequest from "@/auth/actions/validate";
+import Navbar from "@/components/Navbar";
+import styles from "./layout.module.scss";
 
 export default async function AuthenticatedLayout({
   children,
@@ -12,5 +14,10 @@ export default async function AuthenticatedLayout({
     redirect("/auth/sign-in");
   }
 
-  return <>{children}</>;
+  return (
+    <div className={styles.container}>
+      <Navbar />
+      {children}
+    </div>
+  );
 }
