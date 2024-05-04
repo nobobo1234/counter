@@ -1,0 +1,45 @@
+.stats {
+    border: 3px solid #0A122A;
+    border-radius: 1rem;
+    padding: 2rem 4rem;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        font-family: "Montserrat", sans-serif;
+
+        &:first-child {
+            .stats__item-text {
+                font-weight: bold;
+            }
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+
+        &-title {
+            font-size: 1.8rem;
+            margin-bottom: .5rem;
+            font-weight: 300;
+        }
+
+        &-content {
+            display: flex;
+            align-items: center;
+            font-size: 2.4rem;
+        }
+
+        &-icon {
+            font-size: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+        }
+
+        &-text {
+            font-size: 2.5rem;
+        }
+    }
+}

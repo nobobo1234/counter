@@ -24,6 +24,7 @@
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
+    "react-material-symbols": "^4.4.0",
     "zod": "^3.23.4",
     "zxcvbn": "^4.4.2"
   },

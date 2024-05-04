@@ -5,9 +5,10 @@ import LineChart from "./chart";
 import Top3 from "@/components/Leaderboard/Top3";
 import Leaderboard from "@/components/Leaderboard/Leaderboard";
 import validateRequest from "@/auth/actions/validate";
-import { redirect } from "next/navigation";
 
 import numbers from "@/numbers";
+import PersonalStats from "@/components/Stats/Personal";
+import GlobalStats from "@/components/Stats/Global";
 
 export default async function Page() {
   const { user } = await validateRequest();
@@ -21,7 +22,7 @@ export default async function Page() {
         </div>
         <p className={styles["container__error"]}>
           Je bent nog niet onderdeel van een groep, vraag de beheerder voor een
-          toegangscode.
+          toegangscode of maak zelf een groep aan.
         </p>
       </div>
     );
@@ -54,6 +55,10 @@ export default async function Page() {
       </div>
       <Top3 />
       <Leaderboard />
+      <PersonalStats />
+      <div>
+        <GlobalStats />
+      </div>
     </div>
   );
 }

@@ -3,7 +3,8 @@
     display: grid;
     grid-template-columns: 4fr 3fr;
     min-height: 100vh;
-    row-gap: 2rem;
+    row-gap: 4rem;
+    column-gap: 6rem;
     grid-template-rows: min-content;
 
     @media only screen and (max-width: 38.125em) {
