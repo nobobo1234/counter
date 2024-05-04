@@ -1,33 +1,72 @@
 import { prisma } from "@/db";
+import validateRequest from "@/auth/actions/validate";
+import { redirect } from "next/navigation";
+import { User } from "lucia";
+import styles from "./page.module.scss";
+import Input from "@/components/Input";
 
 export default async function Page() {
-  async function createGroup(formData: FormData) {
+  const { user } = await validateRequest();
+  if (!user) {
+    return redirect("/auth/sign-in");
+  }
+
+  if (user.group) {
+    return redirect("/group");
+  }
+
+  async function createGroup(formData: FormData, user: User) {
     "use server";
-    await prisma.group.create({
+    const group = await prisma.group.create({
       data: {
         name: formData.get("groupName") as string,
       },
     });
+
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        user_type: "admin",
+        group: {
+          connect: {
+            id: group.id,
+          },
+        },
+      },
+    });
+
+    await prisma.person.create({
+      data: {
+        name: "Test",
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+        group: {
+          connect: {
+            id: group.id,
+          },
+        },
+      },
+    });
+
+    return redirect(`/group`);
   }
 
   return (
-    <main className="container mx-auto">
-      <h1 className="text text-2xl">New Group</h1>
-      <form action={createGroup} className="space-y-4">
-        <div>
-          <label
-            htmlFor="groupName"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Group Name
-          </label>
-          <input
-            type="text"
-            id="groupName"
-            name="groupName"
-            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-          />
-        </div>
+    <div className={styles["new-group"]}>
+      <h1 className={styles["new-group__title"]}>New Group</h1>
+      <form
+        action={async (formData) => {
+          "use server";
+          createGroup(formData, user);
+        }}
+        className={styles["new-group__form"]}
+      >
+        <Input name="groupName" placeholder="Group Name" />
         <div>
           <button
             type="submit"
@@ -37,6 +76,6 @@ export default async function Page() {
           </button>
         </div>
       </form>
-    </main>
+    </div>
   );
 }

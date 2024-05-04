@@ -2,8 +2,9 @@ import styles from "./Leaderboard.module.scss";
 import useLeaderboard from "@/hooks/useLeaderboard";
 import classNames from "classnames";
 
-const Top3 = () => {
+const Top3 = ({ unit }: { unit: string }) => {
   const { top3 } = useLeaderboard();
+
   return (
     <div className={styles.top3}>
       <div className={styles["top3__item"]}>
@@ -17,7 +18,9 @@ const Top3 = () => {
           <span className={styles["top3__podium-text"]}>
             2<sup>ste</sup>
           </span>
-          <p>{top3[1].sum} punten</p>
+          <p>
+            {top3[1].sum} {unit}
+          </p>
         </div>
       </div>
       <div className={classNames(styles["top3__item"])}>
@@ -31,7 +34,9 @@ const Top3 = () => {
           <span className={styles["top3__podium-text"]}>
             1<sup>ste</sup>
           </span>
-          <p>{top3[0].sum} punten</p>
+          <p>
+            {top3[0].sum} {unit}
+          </p>
         </div>
       </div>
       <div className={classNames(styles["top3__item"])}>
@@ -45,7 +50,9 @@ const Top3 = () => {
           <span className={styles["top3__podium-text"]}>
             3<sup>de</sup>
           </span>
-          <p>{top3[2].sum} punten</p>
+          <p>
+            {top3[2].sum} {unit}
+          </p>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import LineChart from "./chart";
 import Top3 from "@/components/Leaderboard/Top3";
 import Leaderboard from "@/components/Leaderboard/Leaderboard";
 import validateRequest from "@/auth/actions/validate";
+import Link from "next/link";
 
 import numbers from "@/numbers";
 import PersonalStats from "@/components/Stats/Personal";
@@ -22,7 +23,8 @@ export default async function Page() {
         </div>
         <p className={styles["container__error"]}>
           Je bent nog niet onderdeel van een groep, vraag de beheerder voor een
-          toegangscode of maak zelf een groep aan.
+          toegangscode of{" "}
+          <Link href="/group/new">maak zelf een groep aan.</Link>
         </p>
       </div>
     );
@@ -53,8 +55,8 @@ export default async function Page() {
           voor <b>{group?.name}</b>
         </H3>
       </div>
-      <Top3 />
-      <Leaderboard />
+      <Top3 unit={group?.unit || "punten"} />
+      <Leaderboard unit={group?.unit || "punten"} />
       <PersonalStats />
       <div>
         <GlobalStats />
