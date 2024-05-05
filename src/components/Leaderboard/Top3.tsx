@@ -1,5 +1,4 @@
 import styles from "./Leaderboard.module.scss";
-import { getRanking } from "@/features/group/counts";
 import classNames from "classnames";
 
 const Top3 = async ({

@@ -13,6 +13,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
 
+            @media only screen and (max-width: 79.75em) {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            @media only screen and (max-width: 42.875em) {
+                grid-template-columns: 1fr;
+            }
+
             & > div {
                 flex-direction: row;
                 column-gap: 2rem;

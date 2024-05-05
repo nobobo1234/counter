@@ -46,6 +46,18 @@
         border-top-right-radius: 1rem;
         margin: 0 3rem;
 
+        @media only screen and (max-width: 87.875em) {
+            width: 12rem;
+            font-size: 1.4rem;
+            margin: 0 2rem;
+        }
+
+        @media only screen and (max-width: 66.5625em) {
+            width: 10rem;
+            font-size: 1.2rem;
+            margin: 0 1rem;
+        }
+
         &-text {
             font-weight: bold;
             font-size: 3rem;

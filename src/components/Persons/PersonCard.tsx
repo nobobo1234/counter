@@ -1,5 +1,5 @@
 "use client";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { Person } from "@prisma/client";
 import styles from "./index.module.scss";
 import Input from "@/components/Input";

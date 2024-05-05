@@ -1,9 +1,12 @@
+"use client";
 import Link from "next/link";
 import styles from "./index.module.scss";
-import validateRequest from "@/features/auth/actions/validate";
+import { useEffect, useState } from "react";
+import NavButton from "./NavButton";
+import classNames from "classnames";
 
-export default async function Navbar() {
-  const { user } = await validateRequest();
+export default function Navbar({ isAdmin }: { isAdmin: boolean }) {
+  const [open, setOpen] = useState(false);
   const links = [
     {
       href: "/group",
@@ -14,7 +17,7 @@ export default async function Navbar() {
       text: "Alle data",
     },
   ];
-  if (user && user.userType === "admin") {
+  if (isAdmin) {
     links.push({
       href: "/group/manage",
       text: "Groep beheren",
@@ -26,18 +29,37 @@ export default async function Navbar() {
     });
   }
 
+  const navClass = classNames(styles.nav, {
+    [styles["nav--open"]]: open,
+  });
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [open]);
+
   return (
-    <nav className={styles.nav}>
-      <h2 className={styles["nav__title"]}>Cntr</h2>
-      <ul className={styles["nav__list"]}>
-        {links.map((link) => (
-          <li key={link.href} className={styles["nav__list-item"]}>
-            <Link className={styles["nav__list-link"]} href={link.href}>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div>
+      <NavButton open={open} onClick={() => setOpen(!open)} />
+      <nav className={navClass}>
+        <h2 className={styles["nav__title"]}>Cntr</h2>
+        <ul className={styles["nav__list"]}>
+          {links.map((link) => (
+            <li key={link.href} className={styles["nav__list-item"]}>
+              <Link
+                className={styles["nav__list-link"]}
+                href={link.href}
+                onClick={() => setOpen(false)}
+              >
+                {link.text}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }
