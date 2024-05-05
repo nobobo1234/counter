@@ -1,8 +1,8 @@
-import signUp from "@/auth/actions/sign-up";
+import signUp from "@/features/auth/actions/sign-up";
 import styles from "./page.module.scss";
 import { H1 } from "@/components/Typography";
 import Input from "@/components/Input";
-import validateRequest from "@/auth/actions/validate";
+import validateRequest from "@/features/auth/actions/validate";
 import redirect from "next/navigation";
 
 export default async function Page() {

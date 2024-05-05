@@ -2,7 +2,7 @@
 import { prisma } from "@/db";
 import { Argon2id } from "oslo/password";
 import { cookies } from "next/headers";
-import { lucia } from "@/auth/auth";
+import { lucia } from "@/features/auth/auth";
 import { redirect } from "next/navigation";
 
 interface Result {

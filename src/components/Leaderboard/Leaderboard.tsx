@@ -1,9 +1,23 @@
 import styles from "./Leaderboard.module.scss";
-import useLeaderboard from "@/hooks/useLeaderboard";
+import { getRanking } from "@/features/group/counts";
 
-const Leaderboard = ({ unit }: { unit: string }) => {
-  const { ranking } = useLeaderboard();
+const Leaderboard = async ({
+  unit,
+  deleteTop3,
+  ranking,
+}: {
+  unit: string;
+  deleteTop3: boolean;
+  ranking: {
+    person: { id: string; name: string } | undefined;
+    sum: number | null;
+  }[];
+}) => {
   const capitalizedUnit = unit.charAt(0).toUpperCase() + unit.slice(1);
+
+  if (deleteTop3) {
+    ranking.splice(0, 3);
+  }
 
   return (
     <ul className={styles["list-from-4"]}>
@@ -12,10 +26,10 @@ const Leaderboard = ({ unit }: { unit: string }) => {
         <p>Naam</p>
         <p>{capitalizedUnit}</p>
       </li>
-      {ranking.slice(3).map((person, index) => (
-        <li className={styles["list-from-4__item"]} key={person.name}>
-          <p>{index + 4}.</p>
-          <p>{person.name}</p>
+      {ranking.map((person, index) => (
+        <li className={styles["list-from-4__item"]} key={person.person?.id}>
+          <p>{index + (deleteTop3 ? 4 : 1)}</p>
+          <p>{person.person?.name}</p>
           <p>
             {person.sum} {unit}
           </p>

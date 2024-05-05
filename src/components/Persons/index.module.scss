@@ -1,4 +1,26 @@
 .personen {
+    &__header {
+        display: flex;
+        align-items: center;
+        column-gap: 2rem;
+    }
+
+    &__add-button {
+        font-size: 1.6rem;
+        padding: 1rem;
+        background-color: #f4f4f4;
+        border: none;
+        color: #333;
+        cursor: pointer;
+        text-align: left;
+        transition: background-color 0.3s;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #e9e9e9;
+        }
+    }
+
     &__link-user {
         display: flex;
         flex-direction: column;
@@ -32,6 +54,12 @@
             flex-direction: column;
             align-items: flex-start;
             row-gap: 2rem;
+
+            form {
+                display: flex;
+                flex-direction: column;
+                row-gap: 2rem;
+            }
 
             &-input {
                 font-size: 2rem !important;

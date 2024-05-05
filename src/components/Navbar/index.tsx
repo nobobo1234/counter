@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./index.module.scss";
-import validateRequest from "@/auth/actions/validate";
+import validateRequest from "@/features/auth/actions/validate";
 
 export default async function Navbar() {
   const { user } = await validateRequest();
@@ -9,11 +9,20 @@ export default async function Navbar() {
       href: "/group",
       text: "Scorebord",
     },
+    {
+      href: "/group/all",
+      text: "Alle data",
+    },
   ];
   if (user && user.userType === "admin") {
     links.push({
       href: "/group/manage",
       text: "Groep beheren",
+    });
+
+    links.push({
+      href: "/group/add_count",
+      text: "Toevoegen",
     });
   }
 

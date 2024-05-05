@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import validateRequest from "@/auth/actions/validate";
+import validateRequest from "@/features/auth/actions/validate";
 import Navbar from "@/components/Navbar";
 import styles from "./layout.module.scss";
 

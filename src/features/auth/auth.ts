@@ -15,6 +15,7 @@ export const lucia = new Lucia(adapter, {
     email: attributes.email,
     group: attributes.groupId,
     userType: attributes.user_type,
+    person: attributes.person,
   }),
 });
 
@@ -26,6 +27,7 @@ declare module "lucia" {
       email: string;
       groupId: string;
       user_type: string;
+      person: string;
     };
   }
 }

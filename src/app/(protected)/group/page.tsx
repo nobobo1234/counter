@@ -4,8 +4,9 @@ import { H1, H3 } from "@/components/Typography";
 import LineChart from "./chart";
 import Top3 from "@/components/Leaderboard/Top3";
 import Leaderboard from "@/components/Leaderboard/Leaderboard";
-import validateRequest from "@/auth/actions/validate";
+import validateRequest from "@/features/auth/actions/validate";
 import Link from "next/link";
+import { getRanking } from "@/features/group/counts";
 
 import numbers from "@/numbers";
 import PersonalStats from "@/components/Stats/Personal";
@@ -45,6 +46,9 @@ export default async function Page() {
     return acc;
   }, []);
 
+  const ranking = await getRanking();
+  const top3 = ranking.slice(0, 3);
+
   return (
     <div className={styles.container}>
       <div className={styles["container__title"]}>
@@ -55,8 +59,12 @@ export default async function Page() {
           voor <b>{group?.name}</b>
         </H3>
       </div>
-      <Top3 unit={group?.unit || "punten"} />
-      <Leaderboard unit={group?.unit || "punten"} />
+      <Top3 unit={group?.unit || "punten"} top3={top3} />
+      <Leaderboard
+        unit={group?.unit || "punten"}
+        deleteTop3={true}
+        ranking={ranking}
+      />
       <PersonalStats />
       <div>
         <GlobalStats />

@@ -1,14 +1,23 @@
 import styles from "./Leaderboard.module.scss";
-import useLeaderboard from "@/hooks/useLeaderboard";
+import { getRanking } from "@/features/group/counts";
 import classNames from "classnames";
 
-const Top3 = ({ unit }: { unit: string }) => {
-  const { top3 } = useLeaderboard();
+const Top3 = async ({
+  unit,
+  top3,
+}: {
+  unit: string;
+  top3: {
+    person: { id: string; name: string } | undefined;
+    sum: number | null;
+  }[];
+}) => {
+  top3.splice(3);
 
   return (
     <div className={styles.top3}>
       <div className={styles["top3__item"]}>
-        <p>{top3[1].name}</p>
+        <p>{top3[1].person?.name}</p>
         <div
           className={classNames(
             styles["top3__podium"],
@@ -24,7 +33,7 @@ const Top3 = ({ unit }: { unit: string }) => {
         </div>
       </div>
       <div className={classNames(styles["top3__item"])}>
-        <p>{top3[0].name}</p>
+        <p>{top3[0].person?.name}</p>
         <div
           className={classNames(
             styles["top3__podium"],
@@ -40,7 +49,7 @@ const Top3 = ({ unit }: { unit: string }) => {
         </div>
       </div>
       <div className={classNames(styles["top3__item"])}>
-        <p>{top3[2].name}</p>
+        <p>{top3[2].person?.name}</p>
         <div
           className={classNames(
             styles["top3__podium"],

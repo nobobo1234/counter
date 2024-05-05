@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
-import { lucia } from "@/auth/auth";
+import { lucia } from "@/features/auth/auth";
 import { prisma } from "@/db";
 
 export default async function signIn(formData: FormData) {

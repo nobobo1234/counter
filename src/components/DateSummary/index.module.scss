@@ -1,0 +1,12 @@
+
+.datesummary {
+    padding: 2rem;
+    border: 3px solid #0A122A;
+    border-radius: 1rem;
+
+    &__total {
+        font-size: 1.8rem;
+        font-style: italic;
+        margin-bottom: 1rem;
+    }
+}

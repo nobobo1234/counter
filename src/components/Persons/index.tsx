@@ -2,61 +2,67 @@
 import { Person } from "@prisma/client";
 import { H3 } from "../Typography";
 import styles from "./index.module.scss";
-import Input from "@/components/Input";
 import { useFormState } from "react-dom";
-import updatePerson from "./person";
+import { updatePerson } from "@/features/group/persons";
+import PersonCard from "./PersonCard";
+import { MaterialSymbol } from "react-material-symbols";
 
 export default function Persons({
   initialPersons,
   users,
+  currentGroup,
 }: {
   initialPersons: Person[];
   users: { email: string; id: string }[];
+  currentGroup: string;
 }) {
-  const [persons, formAction] = useFormState(updatePerson, initialPersons);
-  console.log(initialPersons);
+  const [state, formAction] = useFormState(updatePerson, {
+    persons: initialPersons,
+    message: "",
+  });
+
+  const deletePersonEvent = (id: string) => {
+    "use client";
+    // generate new formData
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("action", "delete");
+    // call formAction with new formData
+    formAction(formData);
+  };
+
+  const addPersonEvent = () => {
+    "use client";
+    // generate new formData
+    const formData = new FormData();
+    formData.append("action", "add");
+    formData.append("name", "Nieuw");
+    formData.append("user", "0");
+    formData.append("group", currentGroup);
+    // call formAction with new formData
+    formAction(formData);
+  };
 
   return (
     <div className={styles["personen"]}>
-      <H3>Personen</H3>
+      <div className={styles["personen__header"]}>
+        <H3>Personen</H3>
+        <button
+          className={styles["personen__add-button"]}
+          onClick={addPersonEvent}
+        >
+          Voeg persoon toe
+        </button>
+      </div>
       <ul className={styles["personen__list"]}>
-        {persons?.map((person) => (
-          <li className={styles["personen__list-item"]} key={person.id}>
-            <form action={formAction}>
-              <input type="hidden" name="id" value={person.id} />
-              <Input
-                name="name"
-                value={person.name}
-                className={styles["personen__list-item-input"]}
-              />
-              <div className={styles["personen__link-user"]}>
-                <span className={styles["personen__link-user-title"]}>
-                  Koppel persoon aan gebruiker
-                </span>
-                <select name="user" value={person?.userId || 0}>
-                  <option key={0} value={0}>
-                    Selecteer een gebruiker
-                  </option>
-                  {users.map((user) => (
-                    <option key={user.id} value={user.id}>
-                      {user.email}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className={styles["personen__actions"]}>
-                <button
-                  type="submit"
-                  className={styles["personen__list-item-button"]}
-                >
-                  Sla op
-                </button>
-                <button className={styles["personen__list-item-button"]}>
-                  Verwijder
-                </button>
-              </div>
-            </form>
-          </li>
+        {state?.persons.map((person: Person) => (
+          <PersonCard
+            initialPerson={person}
+            users={users}
+            key={person.id}
+            formAction={formAction}
+            deletePerson={deletePersonEvent}
+          />
         ))}
       </ul>
     </div>

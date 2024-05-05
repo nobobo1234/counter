@@ -2,7 +2,7 @@ import { H1 } from "@/components/Typography";
 import { prisma } from "@/db";
 import GroupList from "@/components/GroupList";
 import styles from "./page.module.scss";
-import validateRequest from "@/auth/actions/validate";
+import validateRequest from "@/features/auth/actions/validate";
 import { redirect } from "next/navigation";
 
 export default async function Home() {

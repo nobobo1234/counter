@@ -2,6 +2,13 @@
     border: 3px solid #0A122A;
     border-radius: 1rem;
     padding: 2rem 4rem;
+     
+    & > p {
+        font-size: 1.8rem;
+        font-style: italic;
+        margin-bottom: 1rem;
+        font-family: "Montserrat", sans-serif;
+    }
 
     &__item {
         display: flex;

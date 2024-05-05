@@ -1,8 +1,8 @@
 import Input from "@/components/Input";
 import styles from "./page.module.scss";
-import signIn from "@/auth/actions/sign-in";
+import signIn from "@/features/auth/actions/sign-in";
 import { H1 } from "@/components/Typography";
-import validateRequest from "@/auth/actions/validate";
+import validateRequest from "@/features/auth/actions/validate";
 import { redirect } from "next/navigation";
 
 export default async function SignIn() {

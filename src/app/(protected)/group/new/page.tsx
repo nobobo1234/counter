@@ -1,5 +1,5 @@
 import { prisma } from "@/db";
-import validateRequest from "@/auth/actions/validate";
+import validateRequest from "@/features/auth/actions/validate";
 import { redirect } from "next/navigation";
 import { User } from "lucia";
 import styles from "./page.module.scss";
