@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import Persons from "@/components/Persons";
 import Link from "next/link";
 import Input from "@/components/Input";
+import { headers } from "next/headers";
 
 export default async function Page() {
   const { user } = await validateRequest();
@@ -36,6 +37,10 @@ export default async function Page() {
     },
   });
 
+  // get the current url to display the invite link
+  const headersList = headers();
+  const domain = headersList.get("x-forwarded-host") || headersList.get("host");
+
   return (
     <div className={styles.container}>
       <div className={styles["container__title"]}>
@@ -54,8 +59,8 @@ export default async function Page() {
       <div className={styles["inviteLink"]}>
         <H3>Uitnodigingslink</H3>
         <Link
-          href={`/group/join/${group?.inviteCode}`}
-        >{`/group/join/${group?.inviteCode}`}</Link>
+          href={`https://${domain}/group/join/${group?.inviteCode}`}
+        >{`https://${domain}/group/join/${group?.inviteCode}`}</Link>
       </div>
       <Persons
         initialPersons={persons}

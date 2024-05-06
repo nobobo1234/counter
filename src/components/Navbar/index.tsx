@@ -5,7 +5,13 @@ import { useEffect, useState } from "react";
 import NavButton from "./NavButton";
 import classNames from "classnames";
 
-export default function Navbar({ isAdmin }: { isAdmin: boolean }) {
+export default function Navbar({
+  isAdmin,
+  isLoggedIn,
+}: {
+  isAdmin: boolean;
+  isLoggedIn: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const links = [
     {
@@ -26,6 +32,13 @@ export default function Navbar({ isAdmin }: { isAdmin: boolean }) {
     links.push({
       href: "/group/add_count",
       text: "Toevoegen",
+    });
+  }
+
+  if (isLoggedIn) {
+    links.push({
+      href: "/auth/sign-out",
+      text: "Uitloggen",
     });
   }
 

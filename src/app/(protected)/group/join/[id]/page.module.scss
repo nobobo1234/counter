@@ -1,0 +1,31 @@
+@import "../../../../container";
+
+.container {
+    @include container;
+    row-gap: 2rem;
+    column-gap: 6rem;
+    grid-template-rows: min-content min-content min-content;
+
+    &__text {
+        font-family: "Roboto", sans-serif;
+        font-size: 1.8rem;
+    }
+
+    &__button {
+        font-size: 1.6rem;
+        padding: 1rem;
+        background-color: #0A122A;
+        border: none;
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: left;
+        transition: background-color 0.3s;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #e9e9e9;
+        }
+    }
+}
