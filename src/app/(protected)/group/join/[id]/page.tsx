@@ -18,12 +18,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     return redirect("/group");
   }
 
-  const confirmJoin = async () => {
-    "use server";
-    await join(requestedGroup.id, params.id);
-    return redirect("/group");
-  };
-
   return (
     <div className={styles["container"]}>
       <H1>Groep toetreden</H1>
@@ -32,7 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         zeker dat je toe wilt treden? Klikt dan op onderstaande knop.
       </p>
       <div>
-        <Confirm onConfirm={confirmJoin} />
+        <Confirm inviteCode={params.id} groupId={requestedGroup.id} />
       </div>
     </div>
   );

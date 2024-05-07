@@ -3,7 +3,11 @@ import { prisma } from "@/db";
 import validateRequest from "../auth/actions/validate";
 import { redirect } from "next/navigation";
 
-export default async function join(groupId: string, inviteCode: string) {
+export default async function join(
+  groupId: string,
+  inviteCode: string,
+  _: FormData
+) {
   const user = await validateRequest();
   if (!user) {
     return redirect("/auth/sign-in");
@@ -29,5 +33,5 @@ export default async function join(groupId: string, inviteCode: string) {
     },
   });
 
-  return updatedUser;
+  redirect("/group");
 }
