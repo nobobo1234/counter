@@ -22,16 +22,28 @@ model Group {
 // A user account that can be used to log in and view the data and may be linked to a person
 // that is counted.
 model User {
-    id        String    @id @default(uuid())
-    email     String    @unique
-    password  String
-    user_type String    @default("user")
-    group     Group?    @relation(fields: [groupId], references: [id])
-    groupId   String?
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    sessions  Session[]
-    person    Person?
+    id                String             @id @default(uuid())
+    email             String             @unique
+    password          String
+    user_type         String             @default("user")
+    group             Group?             @relation(fields: [groupId], references: [id])
+    groupId           String?
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
+    sessions          Session[]
+    person            Person?
+    emailConfirmed    Boolean            @default(false)
+    EmailConfirmation EmailConfirmation?
+}
+
+model EmailConfirmation {
+    id        String   @id @default(uuid())
+    code      String
+    userId    String   @unique
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    email     String
+    expiresAt DateTime
+    createdAt DateTime @default(now())
 }
 
 // An entity that represents a person that is counted. This may be linked to a user account

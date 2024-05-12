@@ -1,14 +1,12 @@
 import { prisma } from "@/db";
 import styles from "./page.module.scss";
 import { H1, H3 } from "@/components/Typography";
-import LineChart from "./chart";
 import Top3 from "@/components/Leaderboard/Top3";
 import Leaderboard from "@/components/Leaderboard/Leaderboard";
 import validateRequest from "@/features/auth/actions/validate";
 import Link from "next/link";
 import { getRanking } from "@/features/group/counts";
 
-import numbers from "@/numbers";
 import PersonalStats from "@/components/Stats/Personal";
 import GlobalStats from "@/components/Stats/Global";
 
@@ -36,15 +34,6 @@ export default async function Page() {
       id: user.group,
     },
   });
-
-  // generate the total number of points per date
-  const total = numbers.persons.reduce((acc, person) => {
-    person.counts.forEach((count, index) => {
-      acc[index] = acc[index] || 0;
-      acc[index] += count;
-    });
-    return acc;
-  }, []);
 
   const ranking = await getRanking();
   const top3 = ranking.slice(0, 3);

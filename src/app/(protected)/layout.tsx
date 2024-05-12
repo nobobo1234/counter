@@ -17,6 +17,10 @@ export default async function AuthenticatedLayout({
     redirect("/auth/sign-in");
   }
 
+  if (!user.emailConfirmed) {
+    redirect("/auth/verify-email");
+  }
+
   const isAdmin = user.userType === "admin";
 
   return (

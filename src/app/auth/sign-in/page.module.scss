@@ -41,6 +41,14 @@
         border: 1px solid #ccc;
         margin-bottom: 2rem;
     }
+
+    &__message {
+        // Yellow container 
+        background-color: #f4f4f4;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+    }
 }
 
 .button {
@@ -56,8 +64,14 @@
         text-transform: uppercase;
         font-weight: bold;
         font-family: "Roboto", sans-serif;
+        margin-bottom: 1rem;
 
         &:hover {
             background-color: #0A122A;
+        }
+
+        &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     }

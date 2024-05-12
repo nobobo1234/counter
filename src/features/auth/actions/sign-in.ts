@@ -5,8 +5,20 @@ import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
 import { lucia } from "@/features/auth/auth";
 import { prisma } from "@/db";
+import verifyToken from "../recaptcha";
 
 export default async function signIn(formData: FormData) {
+  const recaptchaToken = formData.get("g-recaptcha-response") as string;
+  const recaptchaResponse = await verifyToken(recaptchaToken);
+
+  if (!recaptchaResponse.success) {
+    return {
+      error: {
+        recaptcha: recaptchaResponse.message,
+      },
+    };
+  }
+
   const user = await prisma.user.findUnique({
     where: {
       email: formData.get("email") as string,
