@@ -1,9 +1,16 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Roboto, Montserrat } from "next/font/google";
 import "react-material-symbols/outlined";
+import classNames from "classnames";
 
 const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"],
+  style: ["normal", "italic"],
+});
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Counter",
@@ -17,7 +24,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={classNames(
+          inter.className,
+          roboto.className,
+          montserrat.className
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }

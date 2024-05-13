@@ -4,6 +4,8 @@ const nextConfig = {
     config.externals.push("@node-rs/argon2", "@node-rs/bcrypt");
     return config;
   },
+  basePath: process.env.NODE_ENV === "production" ? "/counter" : "",
+  assetPrefix: process.env.NODE_ENV === "production" ? "/counter/" : "",
 };
 
 module.exports = nextConfig;

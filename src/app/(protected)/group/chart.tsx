@@ -8,6 +8,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartData,
 } from "chart.js";
 
 ChartJS.register(
@@ -31,7 +32,7 @@ export const options = {
 
 import { Line } from "react-chartjs-2";
 
-const Chart = ({ data }) => {
+const Chart = ({ data }: { data: ChartData<"line"> }) => {
   return <Line data={data} options={options} />;
 };
 

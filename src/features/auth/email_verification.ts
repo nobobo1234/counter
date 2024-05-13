@@ -3,10 +3,14 @@ import { generateRandomString, alphabet } from "oslo/crypto";
 import { prisma } from "@/db";
 import transporter from "@/mail";
 
+const production = process.env.NODE_ENV === "production";
+
 export async function sendVerificationEmail(email: string, code: string) {
+  const user = process.env.ETHEREAL_USER;
+  const domain = process.env.DOMAIN;
   // Send the email
   const message = {
-    from: "martine.bogan@ethereal.email",
+    from: production ? `${user}@${domain}` : user,
     to: email,
     subject: `Verifieer je emailadres`,
     text: `Beste ${email}, je verificatiecode is ${code}`,
