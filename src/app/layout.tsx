@@ -1,18 +1,7 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { Roboto, Montserrat } from "next/font/google";
 import "react-material-symbols/outlined";
-import classNames from "classnames";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
-  style: ["normal", "italic"],
-});
-export const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-heading",
-});
+import { roboto } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Counter",
