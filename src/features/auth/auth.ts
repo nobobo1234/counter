@@ -15,7 +15,7 @@ export const lucia = new Lucia(adapter, {
     email: attributes.email,
     group: attributes.groupId,
     userType: attributes.user_type,
-    person: attributes.person,
+    personId: attributes.person,
     emailConfirmed: attributes.emailConfirmed,
   }),
 });

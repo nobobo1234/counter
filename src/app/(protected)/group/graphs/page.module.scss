@@ -1,0 +1,8 @@
+@import "../../../container";
+
+.container {
+    @include container;
+    row-gap: 2rem;
+    column-gap: 6rem;
+    grid-template-rows: min-content min-content min-content;
+}

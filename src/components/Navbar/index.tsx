@@ -23,6 +23,10 @@ export default function Navbar({
       href: "/group/all",
       text: "Alle data",
     },
+    {
+      href: "/group/graphs",
+      text: "Grafieken",
+    },
   ];
   if (isAdmin) {
     links.push({

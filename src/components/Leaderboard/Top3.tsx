@@ -24,7 +24,7 @@ const Top3 = async ({
           )}
         >
           <span className={styles["top3__podium-text"]}>
-            2<sup>ste</sup>
+            2<sup>de</sup>
           </span>
           <p>
             {top3[1].sum} {unit}
