@@ -87,7 +87,7 @@
         color: white;
         text-decoration: none;
         font-weight: bold;
-        font-family: "Montserrat", sans-serif;
+        font-family: var(--font-heading), sans-serif;
 
         @media only screen and (max-width: 55em) {
             text-decoration: underline;
