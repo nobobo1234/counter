@@ -1,9 +1,49 @@
-.new-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    min-height: 100vh;
+@import "../../container";
+
+.container {
+    @include container;
+    row-gap: 4rem;
+    grid-template-rows: min-content min-content min-content;
+
+    @media only screen and (max-width: 42.875em) {
+        grid-template-columns: 1fr;
+    }
+
+    &__title {
+        grid-column: 1 / -1;
+
+        h1 {
+            margin-bottom: 0rem;
+        }
+
+        h3 {
+            margin-top: 0rem;
+            font-size: 2rem !important;
+        }
+
+    }
+
+    &__error {
+        grid-column: 1 / -1;
+        font-style: italic;
+        font-size: 1.6rem;
+    }
+
+    &__form {
+        &__button {
+            font-size: 1.6rem;
+            padding: 1rem;
+            background-color: #f4f4f4;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.3s;
+            text-decoration: none;
+
+            &:hover {
+                background-color: #e9e9e9;
+            }
+        }
+    }
 }

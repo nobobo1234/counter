@@ -57,17 +57,23 @@ export default async function Page() {
         </H3>
       </div>
       <div className={styles["container__date-summary"]}>
-        {totalByDate.map(async (date) => {
-          const counts = await getByDate(date.countDate);
-          return (
-            <DateSummary
-              key={date.countDate.toDateString()}
-              date={date.countDate}
-              total={date._sum.count || 0}
-              counts={counts}
-            />
-          );
-        })}
+        {totalByDate.length === 0 ? (
+          <p className={styles["container__error"]}>
+            Er zijn nog geen scores ingevoerd.
+          </p>
+        ) : (
+          totalByDate.map(async (date) => {
+            const counts = await getByDate(date.countDate);
+            return (
+              <DateSummary
+                key={date.countDate.toDateString()}
+                date={date.countDate}
+                total={date._sum.count || 0}
+                counts={counts}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { User } from "lucia";
 import styles from "./page.module.scss";
 import Input from "@/components/Input";
+import { H1 } from "@/components/Typography";
 
 export default async function Page() {
   const { user } = await validateRequest();
@@ -15,7 +16,7 @@ export default async function Page() {
     return redirect("/group");
   }
 
-  async function createGroup(formData: FormData, user: User) {
+  async function createGroup(user: User, formData: FormData) {
     "use server";
     const group = await prisma.group.create({
       data: {
@@ -57,21 +58,19 @@ export default async function Page() {
   }
 
   return (
-    <div className={styles["new-group"]}>
-      <h1 className={styles["new-group__title"]}>New Group</h1>
+    <div className={styles.container}>
+      <div className={styles["container__title"]}>
+        <H1>
+          <b>Nieuwe groep</b>
+        </H1>
+      </div>
       <form
-        action={async (formData) => {
-          "use server";
-          createGroup(formData, user);
-        }}
-        className={styles["new-group__form"]}
+        action={createGroup.bind(null, user)}
+        className={styles["container__form"]}
       >
         <Input name="groupName" placeholder="Group Name" />
         <div>
-          <button
-            type="submit"
-            className="inline-block w-full px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
+          <button type="submit" className={styles["container__form__button"]}>
             Create Group
           </button>
         </div>
