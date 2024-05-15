@@ -9,7 +9,10 @@ const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
   style: ["normal", "italic"],
 });
-const montserrat = Montserrat({ subsets: ["latin"] });
+export const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
 
 export const metadata: Metadata = {
   title: "Counter",
@@ -23,9 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={classNames(roboto.className, montserrat.className)}>
-        {children}
-      </body>
+      <body className={roboto.className}>{children}</body>
     </html>
   );
 }

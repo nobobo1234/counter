@@ -10,13 +10,13 @@
         font-size: 1.8rem;
         font-style: italic;
         margin-bottom: 1rem;
-        font-family: "Montserrat", sans-serif;
+        font-family: var(--font-heading), sans-serif;
     }
 
     &__item {
         display: flex;
         flex-direction: column;
-        font-family: "Montserrat", sans-serif;
+        font-family: var(--font-heading), sans-serif;
 
         &:first-child {
             .stats__item-text {
