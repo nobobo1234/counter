@@ -42,7 +42,7 @@ export default async function GlobalStats() {
         text={`${await getTotalLastDate()} ${unit}`}
       />
       <StatItem
-        title="Top 3 op 29/03/2003"
+        title={`Top 3 op ${formattedDate}`}
         icon="emoji_events"
         text={`${(await getTop3PreviousDate()).join(", ")}`}
       />
