@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Input from "../Input";
 import styles from "./ChangeUnit.module.scss";
-import { prisma } from "@/db";
+import updateUnit from "@/features/group/unit";
 
 export default function ChangeUnit({
   initialUnit,
@@ -13,24 +13,8 @@ export default function ChangeUnit({
 }) {
   const [unit, setUnit] = useState(initialUnit);
 
-  const onSubmit = (formData: FormData) => {
-    "use server";
-    prisma.group.update({
-      where: {
-        id: formData.get("groupId") as string,
-      },
-      data: {
-        unit: formData.get("unit") as string,
-      },
-    });
-
-    return {
-      message: "Unit updated",
-    };
-  };
-
   return (
-    <form action={onSubmit}>
+    <form action={updateUnit}>
       <Input type="hidden" value={groupId} name="groupId" />
       <Input
         value={unit}
