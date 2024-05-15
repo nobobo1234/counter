@@ -7,7 +7,6 @@ import Persons from "@/components/Persons";
 import Link from "next/link";
 import Input from "@/components/Input";
 import { headers } from "next/headers";
-import { useRouter } from "next/navigation";
 
 export default async function Page() {
   const { user } = await validateRequest();
