@@ -1,10 +1,9 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { Inter, Roboto, Montserrat } from "next/font/google";
+import { Roboto, Montserrat } from "next/font/google";
 import "react-material-symbols/outlined";
 import classNames from "classnames";
 
-const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["100", "300", "400", "500", "700", "900"],
