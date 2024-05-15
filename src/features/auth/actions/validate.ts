@@ -31,9 +31,7 @@ const validateRequest = cache(
           sessionCookie.attributes
         );
       }
-    } catch (error) {
-      console.error(error);
-    }
+    } catch {}
 
     return result;
   }

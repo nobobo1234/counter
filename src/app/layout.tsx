@@ -24,13 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={classNames(
-          inter.className,
-          roboto.className,
-          montserrat.className
-        )}
-      >
+      <body className={classNames(roboto.className, montserrat.className)}>
         {children}
       </body>
     </html>
