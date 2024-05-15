@@ -68,10 +68,10 @@ export default async function Page() {
         action={createGroup.bind(null, user)}
         className={styles["container__form"]}
       >
-        <Input name="groupName" placeholder="Group Name" />
+        <Input name="groupName" placeholder="Groep naam" />
         <div>
           <button type="submit" className={styles["container__form__button"]}>
-            Create Group
+            Creeër groep
           </button>
         </div>
       </form>
