@@ -1,7 +1,8 @@
 import "./globals.scss";
 import type { Metadata } from "next";
 import "react-material-symbols/outlined";
-import { roboto } from "./fonts";
+import { roboto, montserrat } from "./fonts";
+import classNames from "classnames";
 
 export const metadata: Metadata = {
   title: "Counter",
@@ -15,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={classNames(roboto.className, montserrat.variable)}>
+        {children}
+      </body>
     </html>
   );
 }
