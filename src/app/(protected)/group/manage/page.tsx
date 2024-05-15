@@ -7,6 +7,7 @@ import Persons from "@/components/Persons";
 import Link from "next/link";
 import Input from "@/components/Input";
 import { headers } from "next/headers";
+import ChangeUnit from "@/components/ChangeUnit";
 
 export default async function Page() {
   const { user } = await validateRequest();
@@ -57,8 +58,7 @@ export default async function Page() {
       </div>
       <div className={styles["container__unit"]}>
         <H3>Eenheid van punten</H3>
-        <Input name="unit" value={group?.unit} />
-        <button className={styles["container__unit-button"]}>Opslaan</button>
+        <ChangeUnit groupId={group?.id || ""} initialUnit={group?.unit || ""} />
       </div>
       <div className={styles["inviteLink"]}>
         <H3>Uitnodigingslink</H3>
