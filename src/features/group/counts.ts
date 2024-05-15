@@ -142,6 +142,9 @@ export const getRanking = async () => {
     },
   });
 
+  // If no counts are found, return an empty array
+  if (sumCounts.length === 0) return [];
+
   // Get the usernames of each person
   const persons = await prisma.person.findMany({
     where: {

@@ -48,16 +48,24 @@ export default async function Page() {
           voor <b>{group?.name}</b>
         </H3>
       </div>
-      <Top3 unit={group?.unit || "punten"} top3={top3} />
-      <Leaderboard
-        unit={group?.unit || "punten"}
-        deleteTop3={true}
-        ranking={ranking}
-      />
-      <PersonalStats />
-      <div>
-        <GlobalStats />
-      </div>
+      {ranking.length === 0 ? (
+        <p className={styles["container__error"]}>
+          Er zijn nog geen scores ingevoerd.
+        </p>
+      ) : (
+        <>
+          <Top3 unit={group?.unit || "punten"} top3={top3} />
+          <Leaderboard
+            unit={group?.unit || "punten"}
+            deleteTop3={true}
+            ranking={ranking}
+          />
+          <PersonalStats />
+          <div>
+            <GlobalStats />
+          </div>
+        </>
+      )}
     </div>
   );
 }
