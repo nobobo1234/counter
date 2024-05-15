@@ -4,6 +4,7 @@ import styles from "./index.module.scss";
 import { useEffect, useState } from "react";
 import NavButton from "./NavButton";
 import classNames from "classnames";
+import logout from "@/features/auth/actions/logout";
 
 export default function Navbar({
   isAdmin,
@@ -32,13 +33,6 @@ export default function Navbar({
     links.push({
       href: "/group/add_count",
       text: "Toevoegen",
-    });
-  }
-
-  if (isLoggedIn) {
-    links.push({
-      href: "/auth/sign-out",
-      text: "Uitloggen",
     });
   }
 
@@ -71,6 +65,15 @@ export default function Navbar({
               </Link>
             </li>
           ))}
+          (isLoggedIn && (
+          <li className={styles["nav__list-item"]}>
+            <form action={logout}>
+              <button type="submit" className={styles["nav__list-link"]}>
+                Uitloggen
+              </button>
+            </form>
+          </li>
+          ))
         </ul>
       </nav>
     </div>
