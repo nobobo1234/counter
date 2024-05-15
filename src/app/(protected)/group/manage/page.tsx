@@ -7,10 +7,9 @@ import Persons from "@/components/Persons";
 import Link from "next/link";
 import Input from "@/components/Input";
 import { headers } from "next/headers";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default async function Page() {
-  const path = useRouter().basePath;
   const { user } = await validateRequest();
   if (!user || user.userType !== "admin" || user.group === null) {
     return redirect("/group");
@@ -43,7 +42,9 @@ export default async function Page() {
   const headersList = headers();
   const domain = headersList.get("x-forwarded-host") || headersList.get("host");
 
-  const link = `https://${domain}${path}/group/join/${group?.inviteCode}`;
+  const link = `https://${domain}${process.env.BASE_PATH || ""}/group/join/${
+    group?.inviteCode
+  }`;
 
   return (
     <div className={styles.container}>
