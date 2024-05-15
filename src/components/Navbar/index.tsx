@@ -65,15 +65,15 @@ export default function Navbar({
               </Link>
             </li>
           ))}
-          (isLoggedIn && (
-          <li className={styles["nav__list-item"]}>
-            <form action={logout}>
-              <button type="submit" className={styles["nav__list-link"]}>
-                Uitloggen
-              </button>
-            </form>
-          </li>
-          ))
+          {isLoggedIn && (
+            <li className={styles["nav__list-item"]}>
+              <form action={logout}>
+                <button type="submit" className={styles["nav__list-link"]}>
+                  Uitloggen
+                </button>
+              </form>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
