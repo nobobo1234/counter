@@ -21,7 +21,7 @@ export default async function GlobalStats() {
   const unit = group?.unit || "punten";
 
   // Return the previous date in the form of DD-MM-YYYY
-  const previousDate = await getPreviousDate();
+  const previousDate = await getPreviousDate(group?.id);
   const formattedDate = previousDate
     ?.toISOString()
     .split("T")[0]
@@ -34,17 +34,17 @@ export default async function GlobalStats() {
       <StatItem
         title={`Totaal aantal ${unit}`}
         icon="groups"
-        text={`${await getTotalCount()} ${unit}`}
+        text={`${await getTotalCount(group?.id)} ${unit}`}
       />
       <StatItem
         title={`Totale ${unit} op ${formattedDate}`}
         icon="undo"
-        text={`${await getTotalLastDate()} ${unit}`}
+        text={`${await getTotalLastDate(group?.id)} ${unit}`}
       />
       <StatItem
         title={`Top 3 op ${formattedDate}`}
         icon="emoji_events"
-        text={`${(await getTop3PreviousDate()).join(", ")}`}
+        text={`${(await getTop3PreviousDate(group?.id)).join(", ")}`}
       />
     </div>
   );

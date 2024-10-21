@@ -35,7 +35,7 @@ export default async function Page() {
     },
   });
 
-  const ranking = await getRanking();
+  const ranking = await getRanking(group?.id);
   const top3 = ranking.slice(0, 3);
 
   return (

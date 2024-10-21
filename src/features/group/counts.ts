@@ -1,8 +1,17 @@
 "use server";
 import { prisma } from "@/db";
 
-export const getTotalCount = async () => {
+export const getTotalCount = async (groupId?: string) => {
+  if (!groupId) {
+    return 0;
+  }
+
   const total = await prisma.count.aggregate({
+    where: {
+      person: {
+        groupId: groupId
+      }
+    },
     _sum: {
       count: true,
     },
@@ -11,7 +20,7 @@ export const getTotalCount = async () => {
   return total._sum.count;
 };
 
-export const personalStats = async (userId: string) => {
+export const personalStats = async (userId: string, groupId: string) => {
   const counts = await prisma.count.groupBy({
     by: ["personId"],
     _sum: {
@@ -22,7 +31,7 @@ export const personalStats = async (userId: string) => {
     },
   });
 
-  const previousDate = await getPreviousDate();
+  const previousDate = await getPreviousDate(groupId);
   const previousCount = await prisma.count.findFirst({
     where: {
       personId: userId,
@@ -30,7 +39,7 @@ export const personalStats = async (userId: string) => {
     },
   });
 
-  const ranking = await getRanking();
+  const ranking = await getRanking(groupId);
   const userRank = ranking.findIndex((rank) => rank.person?.id === userId);
 
   function getWithOrdinal(n: number) {
@@ -53,9 +62,14 @@ export const personalStats = async (userId: string) => {
   };
 };
 
-export const getPreviousDate = async () => {
+export const getPreviousDate = async (groupId?: string) => {
   // Find the last date that has counts
   const previousDate = await prisma.count.findFirst({
+    where: {
+      person: {
+        groupId: groupId,
+      }
+    },
     select: {
       countDate: true,
     },
@@ -67,8 +81,8 @@ export const getPreviousDate = async () => {
   return previousDate?.countDate;
 };
 
-export const getTop3PreviousDate = async () => {
-  const previousDate = await getPreviousDate();
+export const getTop3PreviousDate = async (groupId?: string) => {
+  const previousDate = await getPreviousDate(groupId);
 
   const top3 = await prisma.count.findMany({
     where: {
@@ -90,8 +104,8 @@ export const getTop3PreviousDate = async () => {
   return top3.map((count) => count.person.name);
 };
 
-export const getTotalLastDate = async () => {
-  const lastDate = await getPreviousDate();
+export const getTotalLastDate = async (groupId?: string) => {
+  const lastDate = await getPreviousDate(groupId);
 
   const total = await prisma.count.aggregate({
     _sum: {
@@ -99,16 +113,22 @@ export const getTotalLastDate = async () => {
     },
     where: {
       countDate: lastDate,
+      person: {
+        groupId: groupId
+      }
     },
   });
 
   return total._sum.count;
 };
 
-export const getByDate = async (date: Date) => {
+export const getByDate = async (date: Date, groupId?: string) => {
   const counts = await prisma.count.findMany({
     where: {
       countDate: date,
+      person: {
+        groupId: groupId
+      }
     },
     include: {
       person: {
@@ -129,9 +149,18 @@ export const getByDate = async (date: Date) => {
   }));
 };
 
-export const getRanking = async () => {
+export const getRanking = async (groupId?: string) => {
+  if (!groupId) {
+    return [];
+  }
+
   const sumCounts = await prisma.count.groupBy({
     by: ["personId"],
+    where: {
+      person: {
+        groupId: groupId
+      }
+    },
     _sum: {
       count: true,
     },

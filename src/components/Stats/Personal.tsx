@@ -34,7 +34,7 @@ export default async function PersonalStats() {
     );
   }
 
-  const stats = await personalStats(person.id);
+  const stats = await personalStats(person.id, person.groupId);
 
   return (
     <div className={classNames(styles.stats, styles["stats--personal"])}>

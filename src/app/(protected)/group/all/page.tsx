@@ -63,7 +63,7 @@ export default async function Page() {
           </p>
         ) : (
           totalByDate.map(async (date) => {
-            const counts = await getByDate(date.countDate);
+            const counts = await getByDate(date.countDate, group?.id);
             return (
               <DateSummary
                 key={date.countDate.toDateString()}
