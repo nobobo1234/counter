@@ -15,6 +15,7 @@ const Top3 = async ({
 
   return (
     <div className={styles.top3}>
+      {top3.length > 1 ? (
       <div className={styles["top3__item"]}>
         <p>{top3[1].person?.name}</p>
         <div
@@ -30,7 +31,7 @@ const Top3 = async ({
             {top3[1].sum} {unit}
           </p>
         </div>
-      </div>
+      </div> ) : undefined}
       <div className={classNames(styles["top3__item"])}>
         <p>{top3[0].person?.name}</p>
         <div
@@ -47,7 +48,7 @@ const Top3 = async ({
           </p>
         </div>
       </div>
-      <div className={classNames(styles["top3__item"])}>
+      {top3.length > 2 ? (<div className={classNames(styles["top3__item"])}>
         <p>{top3[2].person?.name}</p>
         <div
           className={classNames(
@@ -62,7 +63,7 @@ const Top3 = async ({
             {top3[2].sum} {unit}
           </p>
         </div>
-      </div>
+      </div> ) : undefined}
     </div>
   );
 };
